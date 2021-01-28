@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="An aplication for generating random geometric compositions. (Similar to Zdenek Sikora's work.">
+	<meta name="author" content="Ian Ducklink">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Abstract geometry generator</title>
+	<link rel="icon" href="./img/icon.png">
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<h1 class="header">Abstract art generator ver 0.2</h1>
+
+	<div id="settings">
+		<form>
+			<p>Select shape(s)</p>
+			<select id="">
+				<option>square</option>
+				<option>circle</option>
+				<option>random</option>
+			</select>
+
+			<p>Select color</p>
+			<select id="select-color">
+				<option>black</option>
+				<option>blue</option>
+				<option>red</option>
+				<option>white</option>
+				<option>yellow</option>
+				<option>linear-gradient(to bottom, lime, transparent)</option>
+				<option>linear-gradient(to top, orange, transparent)</option>
+				<option>linear-gradient(to right, black, transparent)</option>
+			</select>
+
+			<p>Select background</p>
+			<select>
+				<option>white</option>			
+				<option>random</option>
+				<option>background1</option>
+				<option>background2</option>
+				<option>background3</option>
+			</select>
+
+			<button id="generate-b">Generate</button>
+			<button id="delete-b">Delete</button>
+		</form>
+	</div>
+	
+	<div id="canvas">
+		<div id="frame">
+
+		</div>
+	</div>
+
+
+	<div id="about">
+		<h3>How it should work:</h3>
+		<p style="color: red;">For now only few things work... <br>
+		You can choose the color of shapes and that's it<br>
+		But you can change the color "on the fly" and there's no need to restart the page :)</p>
+		<p>The JS takes your input and uses it to randomly arrange geometric shapes into 1024/1024 grid. <br>
+		You can check the console, for some info about the generation process :)<br>
+		Thank you for </p>
+	</div>
+
+
+	<script type="text/javascript" src="main.js"></script>
+</body>
+</html>
