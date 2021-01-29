@@ -2,17 +2,34 @@ body {
 	font-family: sans-serif;
 }
 
+/* UI styles */
 #delete {
 	background: orange;
 }
 
-#canvas {
-	width: 70vw;
-	max-width: 600px;
-	height: 70vw;
-	max-height: 600px;
+#generate-b {
+	margin: 10px;
+	background: #555;
+	border: 1px solid #000;
+	width: 80px;
+	height: 20px;
+	color: #FFF;
+	border-radius: 3% / 12%;
+}
 
-	margin: 100px auto;
+#generate-b:hover {
+	background: #000;
+}
+
+
+/* canvas styles */
+#canvas {
+	width: 75vw;
+	max-width: 650px;
+	height: 75vw;
+	max-height: 650px;
+
+	margin: 70px auto;
 	background: #fff;
 	padding: 0;
 }
@@ -36,6 +53,9 @@ body {
 	/* border-radius: 50%; */
 	display: flex;
 	background: white;
+	/* border: 10px solid black;
+	border-left: 10px solid transparent;
+	border-top: 10px solid transparent; */
 }
 
 .block p {
