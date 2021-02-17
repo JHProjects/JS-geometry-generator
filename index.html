@@ -10,29 +10,40 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-	<h1 class="header">Abstract art generator ver 0.3</h1>
+	<h1 class="header">Abstract art generator ver 0.4.5</h1>
 
 	<div id="settings">
 		<form>
+			<p>The grid index</p>
+			<span id="grid-index">
+				<input id="select-number" type="number" name="" value="10"> 
+				anything above 400 will kill this browser!
+			</span>
+
 			<p>Select shape(s)</p>
-			<select id="select-shape">
-				<option>square</option>
-				<option>circle</option>
-				<option>random</option>
-			</select>
+			<span id="shape-selection">
+				<select id="select-shape">
+					<option>square</option>
+				</select>
+			</span>
+			<button class="">Add more options...</button>
 
 			<p>Select color</p>
-			<select id="select-color">
-				<option>black</option>
-				<option>blue</option>
-				<option>red</option>
-				<option>white</option>
-				<option>yellow</option>
-				<option>magenta</option>
-				<option>linear-gradient(to bottom, lime, transparent)</option>
-				<option>linear-gradient(to top, orange, transparent)</option>
-				<option>linear-gradient(to right, black, transparent)</option>
-			</select>
+			<span id="color-selection">
+				<select id="select-color">
+					<option>black</option>
+					<option>blue</option>
+					<option>red</option>
+					<option>white</option>
+					<option>yellow</option>
+					<option>magenta</option>
+					<option>linear-gradient(to bottom, lime, transparent)</option>
+					<option>linear-gradient(to top, orange, transparent)</option>
+					<option>linear-gradient(to right, black, transparent)</option>
+				</select>
+			</span>
+			<button class="add-option-button">Add more options...</button>
+			<span style="font-size: 0.7rem">(transparent color is always added to the list)</span>
 
 			<p>Select background</p>
 			<select id="select-bg">
@@ -63,7 +74,8 @@
 		<h3>How it should work:</h3>
 		<p style="color: red;">For now only few things work... <br>
 		You can choose the color of shapes and background<br>
-		You can change the color "on the fly" and there's no need to restart the page :)</p>
+		You can change the color "on the fly" and there's no need to restart the page :)<br>
+		NOW YOU CAN CHOOSE UP TO 3 COLORS OF GENERATED SHAPES!!</p>
 		<p>The JS takes your input and uses it to randomly arrange geometric shapes into 1024/1024 grid. <br>
 		You can check the console, for some info about the generation process :)<br>
 		Thank you for </p>
