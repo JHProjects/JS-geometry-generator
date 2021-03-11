@@ -2,7 +2,10 @@ let frame = document.getElementById("frame");
 let block = document.getElementById("block");
 let theGenerateButton = document.getElementById("generate-b");
 let theDeleteButton = document.getElementById("delete-b");
+let theCycleButton = document.querySelector("#cycle-b");
 let plusOptionButtons = document.querySelector(".add-option-button");
+let statusOfLoop = false;
+let loop;
 
 // USER INPUTS
 let userInputNumber = document.querySelector("#select-number");
@@ -23,13 +26,30 @@ function createExtraOption(e) {
 			${userInputBlColor.innerHTML}
 		</select>
 		`);
-
 };
 
 
-// GENERATE BUTTON
-theGenerateButton.addEventListener("click", execute);
+// GENERATE & CYCLE BUTTON
+theGenerateButton.addEventListener("click", generate);
 theGenerateButton.addEventListener('keydown', executeShrt);
+theCycleButton.addEventListener("click", cycleToggle);
+
+
+
+function cycleToggle(e) {
+	e.preventDefault();
+
+	if (!statusOfLoop) {
+		loop = setInterval(execute, 500);
+		statusOfLoop = true;
+		theCycleButton.innerHTML = "Stop the loop"
+	} else {
+		clearInterval(loop);
+		statusOfLoop = false;
+		theCycleButton.innerHTML = "Start loop"
+		clearFrame();
+	};
+};
 
 function executeShrt(e) {
 	e.preventDefault();
@@ -40,9 +60,13 @@ function executeShrt(e) {
 	}
 }
 
-function execute(e) {
+function generate(e) {
 	e.preventDefault();
+	execute();
+};
 
+// EXECUTE FUNCTION
+function execute() {
 	generateBlocks();	
 	generateBackground();
 };
@@ -114,11 +138,15 @@ function insertBlocks(bl) {
 // DELETE BUTTON
 theDeleteButton.addEventListener("click", (e) => {
 	e.preventDefault();
+	clearFrame(); 
+});
 	
+
+function clearFrame() {	
 	frame.innerHTML = "";
 	frame.style.border = "1px solid black";
 	frame.style.background = "";
-})
+}
 
 
 
