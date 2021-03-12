@@ -1,3 +1,4 @@
+// CONSTRUCTOR
 let frame = document.getElementById("frame");
 let block = document.getElementById("block");
 let theGenerateButton = document.getElementById("generate-b");
@@ -6,48 +7,52 @@ let theCycleButton = document.querySelector("#cycle-b");
 let plusOptionButtons = document.querySelector(".add-option-button");
 let statusOfLoop = false;
 let loop;
-
-// USER INPUTS
+// User inputs
 let userInputNumber = document.querySelector("#select-number");
 let colorSelection = document.querySelector("#color-selection");
 let userInputBlShape = document.getElementById("shape-selection");
 let userInputBlColor = document.getElementById("select-color");
 let userInputBgColor = document.getElementById("select-bg");
 
-// ADD MORE SELECTIONS
+// EVENT LISTENERS
 plusOptionButtons.addEventListener("click", createExtraOption);
-
-//functions for clicking "extra option" button
-function createExtraOption(e) {
-	e.preventDefault();
-
-	colorSelection.insertAdjacentHTML("beforeend", `
-		<select>
-			${userInputBlColor.innerHTML}
-		</select>
-		`);
-};
-
-
-// GENERATE & CYCLE BUTTON
+// Generate and cycle buttons
 theGenerateButton.addEventListener("click", generate);
 theGenerateButton.addEventListener('keydown', executeShrt);
 theCycleButton.addEventListener("click", cycleToggle);
+// Delete Button
+theDeleteButton.addEventListener("click", (e) => {
+	e.preventDefault();
+	clearFrame(); 
+});
 
 
+// FUNCTIONS
+function createExtraOption(e) {
+	e.preventDefault();
 
+	if (colorSelection.children.length <= 6) {
+		colorSelection.insertAdjacentHTML("beforeend", `
+			<select>${userInputBlColor.innerHTML}</select>
+		`);
+	} else {
+		console.error("limit of fields exceeded");
+	};
+};
+
+// Cycle toggle
 function cycleToggle(e) {
 	e.preventDefault();
 
 	if (!statusOfLoop) {
-		loop = setInterval(execute, 500);
+		execute();
+		loop = setInterval(execute, 750);
 		statusOfLoop = true;
-		theCycleButton.innerHTML = "Stop the loop"
+		theCycleButton.innerHTML = "Stop the loop";
 	} else {
 		clearInterval(loop);
 		statusOfLoop = false;
-		theCycleButton.innerHTML = "Start loop"
-		clearFrame();
+		theCycleButton.innerHTML = "Start loop";
 	};
 };
 
@@ -65,21 +70,13 @@ function generate(e) {
 	execute();
 };
 
-// EXECUTE FUNCTION
-function execute() {
-	generateBlocks();	
-	generateBackground();
-};
 
-
-// BACKGROUND GENERATOR
+// BG generator
 function generateBackground() {
-
 	bg = [userInputBgColor.value];
 	insertBg(bg);
 };
 
-//functions for background generator
 function insertBg(bg) {
 	let bgCount = bg.length;
 	frame.style.background = bg[ranNum(bgCount)];
@@ -88,25 +85,18 @@ function insertBg(bg) {
 	console.log("number of backgrounds in array = " + bgCount);
 };
 
-
-// BLOCK GENERATOR
+// Block generator
 function generateBlocks(e) {
+	bl = ["transparent"];
 
-	bl = [
-		colorSelection.children[0].value,
-		"transparent"
-	];
-
-	if (colorSelection.children[1]) {
-		bl.push(colorSelection.children[1].value)	
-	}
-	if (colorSelection.children[2]) {
-		bl.push(colorSelection.children[2].value)	
-	}
+	let x = 1;
+	while (colorSelection.children.length >= x) {
+		bl.push(colorSelection.children[x - 1].value);
+		x++;
+	};
 	insertBlocks(bl);
 };
 
-//functions for block generator
 function insertBlocks(bl) {
 	let blCount = bl.length;
 
@@ -114,7 +104,7 @@ function insertBlocks(bl) {
 
 	let oneSideCount = parseInt(userInputNumber.value);
 
-	if (oneSideCount <= 0 && oneSideCount >= 600) {
+	if (oneSideCount <= 0 || oneSideCount >= 600) {
 		oneSideCount = 2;
 		alert("Choose number above '0' and below 600")
 	};
@@ -135,23 +125,20 @@ function insertBlocks(bl) {
 };
 
 
-// DELETE BUTTON
-theDeleteButton.addEventListener("click", (e) => {
-	e.preventDefault();
-	clearFrame(); 
-});
-	
+// Execute
+function execute() {
+	generateBlocks();	
+	generateBackground();
+};
 
+// Clear Frame
 function clearFrame() {	
 	frame.innerHTML = "";
 	frame.style.border = "1px solid black";
 	frame.style.background = "";
-}
+};
 
-
-
-
-// randomNumberGenerator function
+// randomNumberGenerator
 function ranNum(num) {
 		return Math.floor(Math.random() * num);
 	};
